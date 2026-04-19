@@ -1,0 +1,288 @@
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* TOP BAR */
+header {
+    background: #eef3ee;
+    padding: 15px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+/* TITLE centered + red like prices */
+.header-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #b7102a; /* same as pizza price */
+}
+
+/* BUTTONS top-right */
+.nav-buttons {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}
+
+/* BUTTON STYLE */
+.nav-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-left: 10px;
+    background: #e5e7eb;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-btn:hover {
+    background: #d1d5db;
+}
+
+/* ACTIVE */
+.nav-btn.active {
+    background: #dfe7df;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: #eee;
+    height: 100vh;
+    position: fixed;
+    padding: 100px 20px 20px; /* 👈 more space at top */
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+
+    background: #e5e7eb;        /* same base as nav buttons */
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #cbd5cb; /* same green-ish hover */
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    margin-left: 240px;
+    padding: 20px 40px; /* ← more space left/right */
+    display: flex;
+    gap: 20px;
+}
+
+/* MENU */
+.menu {
+    flex: 2;
+}
+
+.menu h2 {
+    margin-top: 0;
+}
+
+.categories button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.categories button:hover {
+    background: #ddd;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: #f0f0f0;
+}
+
+/* PRICE */
+.price {
+    color: #b7102a;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* CART */
+.cart {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column; /* important */
+}
+
+.cart h3 {
+    margin-top: 0;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* BUTTONS */
+button {
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.btn-primary {
+    background: #b7102a;
+    color: white;
+}
+
+.btn-secondary {
+    background: gray;
+    color: white;
+}
+
+.nav-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-left: 10px;
+    background: #e5e7eb;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-btn:hover {
+    background: #d1d5db;
+}
+
+/* ACTIVE = soft green instead of blue/red */
+.nav-btn.active {
+    background: #dfe7df;
+    color: #333;
+}
+
+.total {
+    color: #b7102a;       /* same red as prices */
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    color: #777;
+    font-size: 14px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity button {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-btn:hover {
+    background: #cbd5cb; /* light green-ish */
+}
+
+.quantity span {
+    width: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+html, body {
+    height: 100%;
+}
+
+.cart-actions {
+    margin-top: auto;          /* pushes to bottom */
+    display: flex;
+    justify-content: flex-end; /* right side */
+    gap: 10px;
+}
+
+/* BUTTON CONTAINER */
+.home-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+/* BUTTON STYLE */
+.home-btn {
+    padding: 10px 20px;
+    background: #e5e7eb; /* light grey like your tabs */
+    color: #111;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    transition: 0.2s;
+}
+
+/* HOVER EFFECT */
+.home-btn:hover {
+    background: #d1d5db;
+}
+
+.main-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 0;              /*  remove sidebar offset */
+    padding: 0;                  /* optional cleaner look */
+
+    flex: 1;                     /* fill available space */
+}

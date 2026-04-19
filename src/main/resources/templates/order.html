@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria Firenze</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <div class="header-title">Pizzeria Firenze</div>
+    <div class="nav-buttons">
+        <a href="homepage.html" class="nav-btn">Accueil</a>
+        <a href="#" class="nav-btn">Déconnecter</a>
+    </div>
+</header>
+<!-- SIDEBAR -->
+<!-- MAIN -->
+<div class="main">
+    <!-- MENU -->
+    <div class="menu">
+        <h2>Nouvelle Commande</h2>
+        <div class="categories">
+            <button onclick="filterItems('pizza')">Pizzas</button>
+            <button onclick="filterItems('boisson')">Boissons</button>
+            <button onclick="filterItems('dessert')">Desserts</button>
+        </div>
+        <div class="grid">
+            <!-- PIZZAS -->
+            <div class="card pizza" onclick="addToCart('Margherita', 12.90)">
+                <b>Margherita</b><br>
+                Basilic, huile d'olive, mozzarella, sauce tomate
+                <div class="price">12,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Funghi', 14.90)">
+                <b>Funghi</b><br>
+                Champignons, mozzarella, sauce tomate
+                <div class="price">14,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Pepperoni', 15.90)">
+                <b>Pepperoni</b><br>
+                Pepperoni, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Diavola', 15.90)">
+                <b>Diavola</b><br>
+                Salami piquant, piment, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Prosciutto', 15.90)">
+                <b>Prosciutto</b><br>
+                Jambon, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Capricciosa', 15.90)">
+                <b>Capricciosa</b><br>
+                Jambon, champignons, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Quattro Formaggi', 15.90)">
+                <b>Quattro Formaggi</b><br>
+                Gorgonzola, parmesan, fromage de chèvre, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <div class="card pizza" onclick="addToCart('Vegetariana', 15.90)">
+                <b>Vegetariana</b><br>
+                Poivrons, courgettes, champignons, oignons, mozzarella, sauce tomate
+                <div class="price">15,90 €</div>
+            </div>
+            <!-- DESSERTS -->
+            <div class="card dessert" onclick="addToCart('Tiramisu', 7)">
+                <b>Tiramisu</b><br>
+                Dessert italien au café et mascarpone
+                <div class="price">7 €</div>
+            </div>
+            <div class="card dessert" onclick="addToCart('Panna Cotta', 7)">
+                <b>Panna Cotta</b><br>
+                Crème sucrée avec coulis
+                <div class="price">7 €</div>
+            </div>
+            <div class="card dessert" onclick="addToCart('Crostata di mele', 7)">
+                <b>Crostata di mele</b><br>
+                Tarte italienne aux pommes avec pâte croustillante
+                <div class="price">7 €</div>
+            </div>
+            <div class="card dessert" onclick="addToCart('Gelato', 6)">
+                <b>Gelato</b><br>
+                Glace italienne
+                <div class="price">6 €</div>
+            </div>
+            <!-- DRINKS -->
+            <div class="card boisson" onclick="addToCart('Eau plate', 3)">
+                <b>Eau plate</b><br>
+                500 ml
+                <div class="price">3 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Eau gazeuse', 3)">
+                <b>Eau gazeuse</b><br>
+                500 ml
+                <div class="price">3 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Coca-Cola', 4)">
+                <b>Coca-Cola</b><br>
+                330 ml
+                <div class="price">4 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Diet Coke', 4)">
+                <b>Diet Coke</b><br>
+                330 ml
+                <div class="price">4 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Orangina', 4)">
+                <b>Orangina</b><br>
+                330 ml
+                <div class="price">4 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Jus d’orange', 4)">
+                <b>Jus d’orange</b><br>
+                250 ml
+                <div class="price">4 €</div>
+            </div>
+            <div class="card boisson" onclick="addToCart('Jus de pomme', 4)">
+                <b>Jus de pomme</b><br>
+                250 ml
+                <div class="price">4 €</div>
+            </div>
+        </div>
+    </div>
+    <!-- CART -->
+    <div class="cart">
+        <h3>Panier Actuel</h3>
+        <p><b>Client:</b></p>
+        <select>
+            <option>Sélectionner un client</option>
+            <option>Marco Rossi</option>
+            <option>Giulia Bianchi</option>
+        </select>
+        <hr>
+        <div id="cart-items"></div>
+        <hr>
+        <p>Sous-total: <span id="subtotal">0 €</span></p>
+        <p>TVA (10%): <span id="tax">0 €</span></p>
+        <div class="total">Total: <span id="total">0 €</span></div>
+
+        <div class="cart-actions">
+            <button class="btn-primary">Valider</button>
+            <button class="btn-secondary" onclick="clearCart()">Annuler</button>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    © Pizzeria Firenze 2026
+</footer>
+<script src="../static/script/main.js"></script>
+</body>
+</html>
