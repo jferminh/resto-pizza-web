@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+
+<header th:fragment="mainHeader">
+    <div class="header-title">Pizzeria Firenze</div>
+    <div class="nav-buttons">
+        <a th:href="@{/orders/new}" class="btn nav">+</a>
+        <a th:href="@{/}" class="btn nav">Accueil</a>
+<!--        <button class="btn nav">Déconnecter</button>-->
+    </div>
+</header>
+
+</body>
+</html>

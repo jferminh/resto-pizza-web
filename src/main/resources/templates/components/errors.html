@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<body>
+
+<div th:fragment="globalErrors">
+    <div th:if="${#fields.hasGlobalErrors()}"
+         class="form-error-box">
+
+        <p th:each="err : ${#fields.globalErrors()}"
+           th:text="${err}">
+        </p>
+
+    </div>
+</div>
+
+</body>
+</html>

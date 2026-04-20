@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Commande - Pizzeria Firenze</title>
+
+    <link rel="stylesheet" th:href="@{/style/form.css}">
+    <link rel="stylesheet" th:href="@{/style/styles.css}">
+    <link rel="stylesheet" th:href="@{/style/navigation.css}">
+    <link rel="stylesheet" th:href="@{/style/modal.css}">
+    <link rel="stylesheet" th:href="@{/style/list-entities.css}">
+</head>
+
+<body>
+
+<footer th:replace="~{components/headers :: mainHeader}"></footer>
+
+<div class="main">
+    <div class="menu">
+        <h1 th:text="${order != null} ? 'Modifier Commande' : 'Nouvelle Commande'"></h1>
+        <div class="categories">
+            <button class="btn" id="btnPizzaFilter" >Pizzas</button>
+            <button class="btn" id="btnDrinkFilter">Boissons</button>
+            <button class="btn" id="btnDessertFilter">Desserts</button>
+        </div>
+        <div class="grid">
+            <!-- PIZZAS -->
+            <div th:each="dish : ${dishes}" class="card selectable"
+                 th:classappend="${#strings.toLowerCase(dish.category)}"
+                 onclick="addToCart(this)"
+                 th:attr="data-id=${dish.id},
+                          data-name=${dish.name},
+                          data-price=${dish.price}">
+                <b th:text="${dish.name}"></b>
+                <p th:text="${dish.description}"></p>
+                <p class="price" th:text="${dish.price + ' €'}"></p>
+            </div>
+        </div>
+    </div>
+    <!-- CART -->
+    <div class="cart">
+        <h1>Panier Actuel</h1>
+        <form th:action="${order != null} ? @{/orders/{id}(id=${order.id})} : @{/orders}"
+              method="post">
+            <div class="form-group">
+                <label for="selectedClient">Client:</label>
+                <select id="selectedClient" name="client.id">
+                    <option th:each="client : ${clients}"
+                            th:value="${client.id}"
+                            th:text="${client.firstName + ' ' + client.lastName}"
+                            th:selected="${order != null and client.id == order.client.id}">
+                        Sélectionner un client
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" name="dailyId" th:value="${order != null} ? ${order.dailyId} : 1">
+            <input type="hidden" name="creationDate" th:value="${order != null} ? ${order.creationDate} : null">
+
+            <!--todo: GET LIST OF ALL STATUSES if 'edit'-->
+            <div th:if="${order != null}">
+                <input type="hidden" name="status.id" value="1">
+            </div>
+            <div th:unless="${order != null}">
+                <input type="hidden" name="status.id" value="1">
+            </div>
+
+            <input type="hidden" name="dailyId" value="1">
+            <div id="cartItems"> </div>
+            <div id="orderInputs"> </div>
+            <!--p>Sous-total: <span id="subtotal">0 €</span></p>
+            <p>TVA (10%): <span id="tax">0 €</span></p-->
+            <div class="total">Total: <span id="totalPrice">0 €</span></div>
+
+            <!--div th:replace="~{components/errors :: globalErrors}"></div-->
+
+            <div class="cart-actions">
+                <button type="submit" class="btn primary">Valider</button>
+                <button class="btn secondary" onclick="clearCart()">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+<script th:src="@{/script/main.js}"></script>
+<script th:src="@{/script/dish-tools.js}"></script>
+<script th:src="@{/script/order-tools.js}"></script>
+
+<script th:inline="javascript">
+    const existingItems = /*[[${order != null ? order.items : null}]]*/ null;
+</script>
+
+</body>
+</html>

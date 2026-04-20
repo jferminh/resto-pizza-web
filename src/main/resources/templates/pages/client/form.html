@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{components/heads :: formHead(
+    ${client.id == null ? 'Nouveau Client' : 'Modifier Client'}
+)}">
+
+</head>
+
+<body>
+
+<header th:replace="~{components/headers :: mainHeader}"></header>
+
+<main class="main centered">
+    <div class="form-container">
+        <h1 th:text="${client.id == null ? 'Ajouter un nouveau client' : 'Modifier le client'}">Formulaire</h1>
+
+        <form th:action="${client.id == null ? '/clients' : '/clients/' + client.id}"
+              th:object="${client}"
+              method="post">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" th:field="*{firstName}"
+                       th:classappend="${#fields.hasErrors('firstName')} ? 'input-error' : ''"
+                       placeholder="Ex: Mario" />
+
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-text">
+                    Erreur prénom
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" th:field="*{lastName}"
+                       th:classappend="${#fields.hasErrors('lastName')} ? 'input-error' : ''"
+                       placeholder="Ex: Rossi" />
+
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-text">
+                    Erreur nom
+                </div>
+            </div>
+
+            <div th:replace="~{components/errors :: globalErrors}"></div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn primary">Sauvegarder</button>
+                <a th:href="@{/clients}" class="btn secondary">Annuler</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+<script th:src="@{/script/main.js}"></script>
+</body>
+</html>

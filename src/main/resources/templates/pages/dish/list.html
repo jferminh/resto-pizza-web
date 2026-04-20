@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{components/heads :: listHead('Plats')}"></head>
+
+<body>
+
+<header th:replace="~{components/headers :: mainHeader}"></header>
+
+<main class="main">
+    <div class="menu">
+        <h1 class="title">Plats</h1>
+
+        <section class="categories-bar">
+            <div class="categories">
+                <button class="btn" id="btnPizzaFilter">Pizzas</button>
+                <button class="btn" id="btnDrinkFilter">Boissons</button>
+                <button class="btn" id="btnDessertFilter">Desserts</button>
+            </div>
+            <a class="btn create" th:href="@{/dishes/new}">
+                + Nouveau
+            </a>
+        </section>
+
+        <section class="grid grid-dish">
+            <div class="card"
+                 th:each="dish : ${dishes}"
+                 th:classappend="${dish.category.toLowerCase()}">
+
+                <b th:text="${dish.name}">TITLE</b><br>
+                <p th:text="${dish.description}">DESCRIPTION</p>
+                <p class="price" th:text="${dish.price} + ' €'">PRICE</p>
+
+                <div class="card-actions">
+
+                    <a class="btn edit"
+                       th:href="@{/dishes/{id}/edit(id=${dish.id})}">
+                        Modifier
+                    </a>
+
+                    <!-- Bouton suppression — ouvre le modal -->
+                    <button type="button"
+                            th:attr="data-id=${dish.id}, data-name=${dish.name}"
+                            onclick="openDeleteModalDish(this)"
+                            class="btn delete">
+                        Supprimer
+                    </button>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+
+<script th:src="@{/script/main.js}"></script>
+<script th:src="@{/script/dish-tools.js}"></script>
+<script th:src="@{/script/modal.js}"></script>
+
+<!-- MODAL SUPPRESSION -->
+<div id="deleteModalDish" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Confirmer la suppression</h3>
+        <p>Êtes-vous sûr de vouloir supprimer définitivement le plat
+            <strong id="modalDishName">Nom du plat</strong> ?
+        </p>
+        <div class="modal-actions">
+            <form id="deleteDishForm" method="post">
+                <button type="submit" class="btn primary">Oui, supprimer</button>
+            </form>
+            <button type="button" class="btn secondary" onclick="closeDeleteModalDish()">
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
