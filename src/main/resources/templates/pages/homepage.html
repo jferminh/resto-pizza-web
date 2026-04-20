@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Firenze</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/style/styles.css}">
+    <link rel="stylesheet" th:href="@{/style/navigation.css}">
+    <link rel="stylesheet" th:href="@{/style/homepage.css}">
+</head>
+
+<body>
+
+<header th:replace="~{components/headers :: mainHeader}"></header>
+
+<main class="hero">
+    <div class="hero-content">
+
+        <span class="hero-badge">Système de gestion interne</span>
+
+        <h1 class="hero-title">
+            Pizzeria<br><span>Firenze</span>
+        </h1>
+
+        <div class="hero-divider">
+            <span class="hero-divider-icon">&#9670;</span>
+        </div>
+
+        <p class="hero-subtitle">
+            Gérez vos plats, clients et commandes depuis une interface centralisée.
+        </p>
+
+        <!-- CARDS -->
+        <nav class="home-cards" aria-label="Navigation principale">
+
+            <a th:href="@{/dishes}" class="home-card">
+                <div class="home-card-icon">&#127829;</div>
+                <div class="home-card-body">
+                    <span class="home-card-title">Plats</span>
+                    <span class="home-card-desc">Ajouter, modifier et supprimer les plats du menu</span>
+                </div>
+                <span class="home-card-arrow">&#8594;</span>
+            </a>
+
+            <a th:href="@{/clients}" class="home-card">
+                <div class="home-card-icon">&#128101;</div>
+                <div class="home-card-body">
+                    <span class="home-card-title">Clients</span>
+                    <span class="home-card-desc">Gérer la liste des clients enregistrés</span>
+                </div>
+                <span class="home-card-arrow">&#8594;</span>
+            </a>
+
+            <a th:href="@{/orders}" class="home-card">
+                <div class="home-card-icon">&#128203;</div>
+                <div class="home-card-body">
+                    <span class="home-card-title">Commandes</span>
+                    <span class="home-card-desc">Suivre et administrer les commandes en cours</span>
+                </div>
+                <span class="home-card-arrow">&#8594;</span>
+            </a>
+
+        </nav>
+
+    </div>
+</main>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+</body>
+</html>

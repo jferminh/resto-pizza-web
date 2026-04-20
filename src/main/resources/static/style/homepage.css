@@ -1,0 +1,335 @@
+/* =========================================
+   HOMEPAGE — homepage.css
+   Dépend de styles.css et navigation.css
+   ========================================= */
+
+/* ─── Body override pour la homepage ─── */
+body {
+    background: #111;
+}
+
+/* ─── Hero Section ─── */
+.hero {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #111;
+    min-height: calc(100vh - 64px - 48px);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+            radial-gradient(ellipse 70% 60% at 50% 40%, rgba(183,16,42,0.22) 0%, transparent 70%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    background-size: auto, 60px 60px;
+    z-index: 0;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ─── Contenu centré ─── */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    padding: 0 24px;
+}
+
+/* ─── Badge ─── */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(183,16,42,0.18);
+    border: 1px solid rgba(183,16,42,0.45);
+    color: #f97c8a;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+.hero-badge::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b7102a;
+    box-shadow: 0 0 6px #b7102a;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* ─── Titre ─── */
+.hero-title {
+    font-family: "Montserrat", "Arial", sans-serif;
+    font-size: clamp(2.6rem, 6vw, 5.2rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.hero-title span {
+    color: var(--color-primary);
+}
+
+/* ─── Sous-titre ─── */
+.hero-subtitle {
+    font-family: "Roboto", sans-serif;
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+    color: rgba(255,255,255,0.52);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    max-width: 440px;
+    margin: 0;
+    line-height: 1.65;
+}
+
+/* ─── Séparateur ─── */
+.hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0;
+}
+
+.hero-divider::before,
+.hero-divider::after {
+    content: "";
+    width: 48px;
+    height: 1px;
+    background: rgba(183,16,42,0.4);
+}
+
+.hero-divider-icon {
+    color: var(--color-primary);
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* ─── Boutons hero ─── */
+.home-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.btn.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.88);
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn.hero-btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+    transform-origin: left;
+}
+
+.btn.hero-btn:hover {
+    background: rgba(183,16,42,0.18);
+    border-color: rgba(183,16,42,0.5);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(183,16,42,0.2);
+    opacity: 1;
+}
+
+.btn.hero-btn:hover::after {
+    transform: scaleX(1);
+}
+
+.btn-icon {
+    font-size: 17px;
+    line-height: 1;
+}
+
+/* ─── Stats ─── */
+.hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 24px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.stat-value {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* ─── Footer ─── */
+footer.footer {
+    background: #0d0d0d;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 24px;
+}
+
+footer.footer p {
+    margin: 0;
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ─── Navigation Cards ─── */
+.home-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 480px;
+    margin-top: 8px;
+}
+
+.home-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px;
+    padding: 18px 20px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ligne rouge gauche au hover */
+.home-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--color-primary);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+    transform-origin: bottom;
+    border-radius: 0 2px 2px 0;
+}
+
+.home-card:hover {
+    background: rgba(183,16,42,0.12);
+    border-color: rgba(183,16,42,0.4);
+    transform: translateX(5px);
+    box-shadow: 0 6px 24px rgba(183,16,42,0.15);
+    opacity: 1;
+}
+
+.home-card:hover::before {
+    transform: scaleY(1);
+}
+
+/* Icône */
+.home-card-icon {
+    font-size: 28px;
+    line-height: 1;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Texte */
+.home-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    text-align: left;
+}
+
+.home-card-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+}
+
+.home-card-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Flèche */
+.home-card-arrow {
+    font-size: 18px;
+    color: rgba(255,255,255,0.2);
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.home-card:hover .home-card-arrow {
+    color: var(--color-primary);
+    transform: translateX(4px);
+}

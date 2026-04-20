@@ -1,94 +1,78 @@
+:root {
+    /* COLORS */
+    --color-primary: #b7102a;
+    --color-primary-hover: #8b0d20;
 
+    --color-success: #16a34a;
+    --color-success-hover: #15803d;
+
+    --color-error: #d9534f;
+
+    --color-blue: #2563eb;
+    --color-blue-hover: #1e40af;
+
+    --color-bg-light: #eef3ee;
+
+    --color-border-light: #d1d5db;
+
+    --color-text-light: var(--color-bg-light);
+    --color-text-dirt: #333;
+    --color-text-dark: #111;
+    --color-text-muted: #777;
+
+    --color-hover: #d1d5db;
+    --color-hover-green: #cbd5cb;
+
+    /* FONTS */
+    --font-main: Roboto, "Helvetica Neue", sans-serif;
+    --font-title: "Montserrat Bold", "Arial", sans-serif;
+
+    /* FONT SIZES */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --text-xl: 22px;
+
+    /* FONT WEIGHTS */
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-bold: 700;
+
+    /* SIZES */
+    --radius: 6px;
+    --radius-small: 4px;
+
+    --padding-main: 20px;
+    --gap-main: 20px;
+
+    --sidebar-width: 220px;
+}
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: var(--font-main), sans-serif;
 }
 
-/* TOP BAR */
-header {
-    background: #eef3ee;
-    padding: 15px;
-    position: relative;
-    border-bottom: 1px solid #ddd;
+html, body {
+    height: 100%;
 }
 
-/* TITLE centered + red like prices */
-.header-title {
+.title {
+    font-style: var(--font-title);
     text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    color: #b7102a; /* same as pizza price */
-}
-
-/* BUTTONS top-right */
-.nav-buttons {
-    position: absolute;
-    right: 20px;
-    top: 12px;
-}
-
-/* BUTTON STYLE */
-.nav-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-left: 10px;
-    background: #e5e7eb;
-    color: #333;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.nav-btn:hover {
-    background: #d1d5db;
-}
-
-/* ACTIVE */
-.nav-btn.active {
-    background: #dfe7df;
-}
-
-/* SIDEBAR */
-.sidebar {
-    width: 220px;
-    background: #eee;
-    height: 100vh;
-    position: fixed;
-    padding: 100px 20px 20px; /* 👈 more space at top */
-}
-
-.sidebar a {
-    display: block;
-    margin-bottom: 12px;
-    padding: 10px 12px;
-
-    background: #e5e7eb;        /* same base as nav buttons */
-    border-radius: 6px;
-    border: 1px solid #d1d5db;
-
-    color: #333;
-    text-decoration: none;
-    font-size: 14px;
-
-    transition: 0.2s;
-}
-
-.sidebar a:hover {
-    background: #cbd5cb; /* same green-ish hover */
+    margin-top: 0;
 }
 
 /* MAIN */
 .main {
     flex: 1;
-    margin-left: 240px;
     padding: 20px 40px; /* ← more space left/right */
     display: flex;
-    gap: 20px;
+    gap: var(--gap-main);
 }
 
 /* MENU */
@@ -96,42 +80,31 @@ header {
     flex: 2;
 }
 
-.menu h2 {
-    margin-top: 0;
-}
-
-.categories button {
-    margin-right: 10px;
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-.categories button:hover {
-    background: #ddd;
-}
-
 /* GRID */
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
-    margin-top: 20px;
+    margin-top: var(--padding-main);
 }
 
 .card {
     background: white;
     padding: 15px;
     border: 1px solid #ccc;
+}
+
+.card.selectable {
     cursor: pointer;
 }
 
-.card:hover {
+.card.selectable:hover {
     background: #f0f0f0;
 }
 
 /* PRICE */
 .price {
-    color: #b7102a;
+    color: var(--color-primary);
     font-weight: bold;
     margin-top: 5px;
 }
@@ -162,59 +135,30 @@ header {
 }
 
 /* BUTTONS */
-button {
-    padding: 8px;
+.btn {
+    text-decoration: none;
+    font-size: var(--text-sm);
     border: none;
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
 }
 
-button:hover {
+.btn:hover {
     opacity: 0.85;
 }
 
-.btn-primary {
-    background: #b7102a;
-    color: white;
-}
-
-.btn-secondary {
-    background: gray;
-    color: white;
-}
-
-.nav-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-left: 10px;
-    background: #e5e7eb;
-    color: #333;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: 0.2s;
-}
-
-.nav-btn:hover {
-    background: #d1d5db;
-}
-
-/* ACTIVE = soft green instead of blue/red */
-.nav-btn.active {
-    background: #dfe7df;
-    color: #333;
-}
-
 .total {
-    color: #b7102a;       /* same red as prices */
+    color: var(--color-primary);
     font-weight: bold;
-    font-size: 18px;
+    font-size: var(--text-lg);
 }
 
 .footer {
     text-align: center;
     padding: 15px;
     color: #777;
-    font-size: 14px;
+    font-size: var(--text-sm);
 }
 
 .quantity {
@@ -232,51 +176,20 @@ button:hover {
     cursor: pointer;
 }
 
-.nav-btn:hover {
-    background: #cbd5cb; /* light green-ish */
-}
-
 .quantity span {
     width: 20px;
     text-align: center;
     font-weight: bold;
 }
 
-html, body {
-    height: 100%;
-}
-
 .cart-actions {
-    margin-top: auto;          /* pushes to bottom */
+    margin-top: auto;
     display: flex;
-    justify-content: flex-end; /* right side */
+    justify-content: flex-end;
     gap: 10px;
 }
 
-/* BUTTON CONTAINER */
-.home-buttons {
-    display: flex;
-    gap: 20px;
-}
-
-/* BUTTON STYLE */
-.home-btn {
-    padding: 10px 20px;
-    background: #e5e7eb; /* light grey like your tabs */
-    color: #111;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    border: 1px solid #d1d5db;
-    transition: 0.2s;
-}
-
-/* HOVER EFFECT */
-.home-btn:hover {
-    background: #d1d5db;
-}
-
-.main-home {
+.main.centered {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -285,4 +198,281 @@ html, body {
     padding: 0;                  /* optional cleaner look */
 
     flex: 1;                     /* fill available space */
+}
+
+.grid-dish {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn.primary {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.btn.secondary {
+    background: gray;
+    color: var(--color-text-light);
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th,
+.order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.order-table th {
+    background-color: #f5f5f5;
+}
+
+/* MODAL BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+/* BUTTONS */
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-red {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: #a71d2a;
+}
+
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* BLUE BUTTON (Modifier) */
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+/* RED BUTTON (Supprimer) */
+.btn-red {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: #a71d2a;
+}
+
+/* =========================================
+   STYLES SPÉCIFIQUES AUX FORMULAIRES (CRUD)
+   ========================================= */
+
+/* --- Gestion des erreurs de validation (Spring @Valid) --- */
+.error-text {
+    color: var(--color-error);
+    font-size: 0.85em;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.input-error {
+    border-color: var(--color-error) !important;
+    background-color: #fdf2f2;
+}
+
+.form-error-box {
+    background-color: #fdf2f2;
+    border: 1px solid var(--color-error);
+    color: var(--color-error);
+    padding: 12px 15px;
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+/* --- Boutons d'action du formulaire --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-submit {
+    background: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    background: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th,
+.order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.order-table th {
+    background-color: #f5f5f5;
+}
+
+/* MODAL BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+}
+
+/* BUTTONS */
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-red {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: #a71d2a;
+}
+
+.modal-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* BLUE BUTTON (Modifier) */
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+/* RED BUTTON (Supprimer) */
+.btn-red {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background-color: #a71d2a;
 }

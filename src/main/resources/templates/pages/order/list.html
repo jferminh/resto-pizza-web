@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{components/heads :: listHead('Commandes')}"></head>
+
+<body>
+    <header th:replace="components/headers :: mainHeader"></header>
+
+    <div class="main">
+        <div class="menu">
+            <h1 class="title">Liste des Commandes</h1>
+            <table class="table-list">
+                <thead>
+                <tr class="table-header">
+                    <th>ID</th>
+                    <th>Client</th>
+                    <th>Détails</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${orders}" class="table-entry">
+                    <td th:text="${order.id}" class="table-value"></td>
+                    <td th:text="${order.client.firstName
+                        + ' ' + order.client.lastName}" class="table-value"></td>
+                    <td class="table-value">
+                        <ul>
+                            <li th:each="item : ${order.items}"
+                                th:text="${item.dish.name + ' x' + item.quantity}">
+                            </li>
+                        </ul>
+                    </td>
+                    <td th:text="${order.status.label}" class="table-value"></td>
+                    <td class="table-value spaced">
+                        <a th:href="@{/orders/{id}/edit(id=${order.id})}" class="btn edit">
+                            Modifier
+                        </a>
+                        <button type="button"
+                                th:attr="data-id=${order.id}"
+                                onclick="openDeleteModalOrder(this)" class="btn delete">
+                            Supprimer
+                        </button>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(orders)}">
+                    <td colspan="4" class="table-empty-entry">
+                        Aucune commande n'est enregistrée pour le moment.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script th:src="@{/script/main.js}"></script>
+    <script th:src="@{/script/modal.js}"></script>
+
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer définitivement la commande
+                <strong id="modalName"></strong> ?
+            </p>
+            <div class="modal-actions">
+                <button id="confirmDeleteBtn" class="btn primary">Oui, supprimer</button>
+
+                <button type="button" class="btn secondary" onclick="closeDeleteModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
