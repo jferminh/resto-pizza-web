@@ -1,0 +1,53 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-container {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    background: transparent;
+    padding: 25px;
+    /*border: 1px solid #ccc;*/
+    width: 420px;
+}
+
+/* GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* LABEL */
+.form-group label {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+/* TEXTAREA SIZE */
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* INPUTS */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    transition: 0.2s;
+}
+
+/* FOCUS EFFECT */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(183,16,42,0.1);
+}

@@ -1,0 +1,44 @@
+/* =========================================
+   STYLE DE LA MODALE DE SUPPRESSION
+   ========================================= */
+
+/* Le fond noir semi-transparent qui recouvre toute la page */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; /* Caché par défaut */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* La boîte blanche au centre */
+.modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.modal-content p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{components/heads :: listHead('Clients')}"></head>
+
+<body>
+
+<header th:replace="~{components/headers :: mainHeader}"></header>
+
+<main class="main">
+    <div class="menu">
+        <h1 class="title">Gestion des Clients</h1>
+        <div class="categories-bar">
+            <a class="btn create" th:href="@{/clients/new}">
+                + Nouveau
+            </a>
+        </div>
+
+        <table class="table-list">
+            <thead>
+            <tr class="table-header">
+                <th>ID</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${clients}" class="table-entry">
+                <td th:text="${c.id}" class="table-value">1</td>
+                <td th:text="${c.firstName}" class="table-value">Jean</td>
+                <td th:text="${c.lastName}" class="table-value">Dupont</td>
+                <td class="table-value spaced">
+
+                    <a th:href="@{/clients/{id}/edit(id=${c.id})}" class="btn edit">
+                        Modifier
+                    </a>
+
+                    <button type="button"
+                            th:attr="data-id=${c.id}, data-name=${c.firstName} + ' ' + ${c.lastName}"
+                            onclick="openDeleteModalClient(this)" class="btn delete">
+                        Supprimer
+                    </button>
+
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(clients)}">
+                <td colspan="4" class="table-empty-entry">
+                    Aucun client n'est enregistré pour le moment.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+<script th:src="@{/script/main.js}"></script>
+<script th:src="@{/script/modal.js}"></script>
+
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Confirmer la suppression</h3>
+        <p>Êtes-vous sûr de vouloir supprimer définitivement le client
+            <strong id="modalName">Nom du client</strong> ?
+        </p>
+        <div class="modal-actions">
+            <button id="confirmDeleteBtn" class="btn primary">Oui, supprimer</button>
+
+            <button type="button" class="btn secondary" onclick="closeDeleteModal()">Annuler</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

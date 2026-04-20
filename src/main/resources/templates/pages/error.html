@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria Firenze</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link rel="stylesheet" th:href="@{/style/styles.css}">
+    <link rel="stylesheet" th:href="@{/style/navigation.css}">
+</head>
+
+
+<body>
+<header th:replace="~{components/headers :: mainHeader}"></header>
+
+<!-- MAIN -->
+<div class="main centered">
+    <h1 th:text="|Error! ${errorMessage.message} (${errorMessage.code})|"></h1>
+</div>
+
+<footer th:replace="~{components/footers :: mainFooter}"></footer>
+
+</body>
+</html>
