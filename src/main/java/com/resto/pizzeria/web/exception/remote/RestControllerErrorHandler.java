@@ -68,6 +68,7 @@ public class RestControllerErrorHandler implements ResponseErrorHandler {
             case CODE_DB_CONSTRAINT_VIOLATION,
                  CODE_NOT_VALIDATED,
                  CODE_INVALID_FORMAT,
+                 CODE_UNKNOWN,
                  CODE_DB_INTEGRITY_VIOLATION ->
                     throw new ApiValidationException(
                          message, fieldsErrors);

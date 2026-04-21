@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <groupId>com.resto</groupId>
-    <artifactId>pizzeria-web</artifactId>
+    <artifactId>resto-pizza-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 	<parent>
@@ -14,7 +14,9 @@
 	</parent>
 
 	<properties>
-		<java.version>25</java.version>
+        <java.version>25</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
@@ -111,6 +113,14 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
