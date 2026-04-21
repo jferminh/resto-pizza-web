@@ -46,3 +46,4 @@ Thumbs.db                  # Fichier Windows
 
 # --- Docker ---
 docker-compose.override.yml  # Surcharges locales (ports perso, volumes dev)
+/src/main/resources/application-dev.properties
