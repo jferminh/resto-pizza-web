@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+    }
+
     environment {
         DOCKER_IMAGE = "jferminh/resto-pizza-web"
         DOCKER_CREDENTIALS = 'dockerhub-credentials'
@@ -21,7 +25,8 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/*.xml'
+                    junit allowEmptyResults: true,
+                    testResults: '**/target/surefire-reports/*.xml'
                 }
             }
         }
