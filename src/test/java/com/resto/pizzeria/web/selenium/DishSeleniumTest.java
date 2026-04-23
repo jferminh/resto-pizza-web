@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("selenium")
 public class DishSeleniumTest {
 
     private WebDriver driver;

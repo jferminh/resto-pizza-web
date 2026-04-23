@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("selenium")
 public class OrderSeleniumTest {
 
     private WebDriver driver;
