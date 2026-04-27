@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = "jferminh/resto-pizza-web"
+        DOCKER_IMAGE = "julitox/resto-pizza-web"
         DOCKER_CREDENTIALS = 'dockerhub-credentials'
         JAVA_VERSION = '25'
     }
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Docker Push') {
             when {
-                branch 'main'
+                expression { env.GIT_BRANCH == 'origin/main'}
             }
             steps {
                 withCredentials([usernamePassword(
