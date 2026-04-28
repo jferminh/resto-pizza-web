@@ -17,6 +17,7 @@
         <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <allure.version>2.39.0</allure.version>
 	</properties>
 
 	<dependencies>
@@ -59,6 +60,14 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Allure JUnit 5 — génère target/allure-results/*.json à chaque test -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
 	</dependencies>
