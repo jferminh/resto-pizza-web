@@ -2,11 +2,16 @@
 // Jenkinsfile — resto-pizza-web
 // Pipeline CI/CD : Clean → Checkout → Build/Test → Allure
 //                → Docker Build → Docker Push (main only)
-// Jenkins en conteneur (DooD) — Java 25 / Spring Boot 4.0.5
-// Tag Docker = SHA Git court (traçabilité commit ↔ image)
+// Java 25 / Spring Boot 4.0.5 — Allure 2.34.0
 // ============================================================
 pipeline {
     agent any
+
+    options {
+        // Désactive le checkout automatique Jenkins
+        // → évite le double clone après cleanWs()
+        skipDefaultCheckout(true)
+    }
 
     tools {
         maven 'Maven'
@@ -20,9 +25,7 @@ pipeline {
     stages {
 
         // ─────────────────────────────────────────────────────
-        // 1. Nettoyage du workspace
-        //    Garantit un environnement reproductible à chaque run
-        //    Principe 12 facteurs : parité dev/prod
+        // 1. Nettoyage du workspace — environnement reproductible
         // ─────────────────────────────────────────────────────
         stage('🧹 Clean Workspace') {
             steps {
@@ -31,18 +34,14 @@ pipeline {
         }
 
         // ─────────────────────────────────────────────────────
-        // 2. Récupération du code source
-        //    checkout scm : utilise la config SCM du pipeline
-        //    Jenkins (URL + branche) → pas d'URL hardcodée
-        //    env.DOCKER_TAG est défini ici car GIT_COMMIT
-        //    n'est disponible qu'APRÈS le checkout
+        // 2. Checkout — après cleanWs(), on clone une seule fois
+        //    env.DOCKER_TAG défini ici car GIT_COMMIT n'existe
+        //    qu'après le checkout (pas disponible dans environment{})
         // ─────────────────────────────────────────────────────
         stage('📥 Checkout') {
             steps {
                 checkout scm
                 script {
-                    // SHA court du commit courant (7 caractères)
-                    // Fallback sur BUILD_NUMBER si GIT_COMMIT est absent
                     env.DOCKER_TAG = env.GIT_COMMIT
                         ? env.GIT_COMMIT[0..6]
                         : env.BUILD_NUMBER
@@ -51,13 +50,9 @@ pipeline {
         }
 
         // ─────────────────────────────────────────────────────
-        // 3. Build Maven + Tests
-        //    mvn clean verify :
-        //      - compile le projet
-        //      - lance les tests (JUnit 5 + Allure JUnit5)
-        //      - génère target/allure-results/*.json
-        //      - génère target/surefire-reports/*.xml
-        //    Les tests Allure et JUnit sont générés en même temps
+        // 3. Build + Tests
+        //    allure-junit5 génère target/allure-results/*.json
+        //    via le ServiceLoader JUnit 5 — sans plugin Maven
         // ─────────────────────────────────────────────────────
         stage('🔨 Build & Tests') {
             steps {
@@ -65,8 +60,6 @@ pipeline {
             }
             post {
                 always {
-                    // Barre de tendance JUnit dans Jenkins (verte/rouge)
-                    // ** : compatible avec les projets Maven multi-modules
                     junit allowEmptyResults: true,
                           testResults: '**/target/surefire-reports/*.xml'
                 }
@@ -74,12 +67,9 @@ pipeline {
         }
 
         // ─────────────────────────────────────────────────────
-        // 4. Construction de l'image Docker
-        //    Deux tags simultanés :
-        //      - :latest       → toujours la dernière version
-        //      - :abc1234      → SHA Git court (traçabilité)
-        //    On peut retrouver l'image d'un commit précis avec
-        //    : docker pull julitox/resto-pizza-web:abc1234
+        // 4. Docker Build — deux tags simultanés
+        //    :latest       → toujours la version courante
+        //    :abc1234      → SHA Git = traçabilité commit ↔ image
         // ─────────────────────────────────────────────────────
         stage('🐳 Docker Build') {
             steps {
@@ -93,12 +83,9 @@ pipeline {
         }
 
         // ─────────────────────────────────────────────────────
-        // 5. Push sur Docker Hub
-        //    when : ne s'exécute QUE sur la branche main
-        //    → les branches feature sont buildées/testées
-        //      mais leurs images ne sont pas poussées
-        //    Sécurité : \$ (backslash dollar) empêche Groovy
-        //    d'interpoler le token → jamais visible dans les logs
+        // 5. Docker Push — uniquement sur la branche main
+        //    \$DOCKER_TOKEN : backslash empêche l'interpolation
+        //    Groovy → le token n'apparaît jamais dans les logs
         // ─────────────────────────────────────────────────────
         stage('🚀 Docker Push') {
             when {
@@ -122,13 +109,11 @@ pipeline {
     }
 
     // ─────────────────────────────────────────────────────────
-    // POST — exécuté après tous les stages, peu importe le statut
+    // POST — rapport Allure généré TOUJOURS, même en cas d'échec
+    // Le plugin Jenkins lit target/allure-results/ directement
     // ─────────────────────────────────────────────────────────
     post {
         always {
-            // Rapport Allure HTML — généré depuis target/allure-results/
-            // Visible dans : icône Allure sur le build + lien "Allure Report"
-            // ALWAYS : rapport généré même si les tests échouent
             allure([
                 includeProperties: false,
                 jdk              : '',
@@ -137,10 +122,9 @@ pipeline {
                 results          : [[path: 'target/allure-results']]
             ])
 
-            // Nettoyage des images Docker locales (libère l'espace Jenkins)
-            // || true : ne fait pas échouer le pipeline si l'image n'existe pas
+            // Nettoyage de l'image taguée par SHA uniquement
+            // (pas :latest — peut être utilisée par un conteneur actif)
             sh "docker rmi ${DOCKER_IMAGE}:${env.DOCKER_TAG} || true"
-            sh "docker rmi ${DOCKER_IMAGE}:latest || true"
         }
 
         success {
